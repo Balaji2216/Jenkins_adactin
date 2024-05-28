@@ -1,20 +1,18 @@
 package com.adactin;
 
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Adactin {
 
 	static WebDriver driver;
 
-	@Test
-	public void browserLaunch() {
+//	@Test
+	public static void browserLaunch() {
 
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
@@ -22,20 +20,20 @@ public class Adactin {
 
 	}
 
-	@Test
-	public void getURL() {
+//	@Test
+	public static void getURL() {
 		driver.get("https://adactinhotelapp.com/");
 	}
 
-	@Test
-	public void login() {
+//	@BeforeTest
+	public static void login() {
 		driver.findElement(By.xpath("//input[@id='username']")).sendKeys("Jivita04");
 		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("123456");
 		driver.findElement(By.xpath("//input[@id='login']")).click();
 	}
 
-	@Test
-	public void searchAndBookHotel() throws Throwable {
+//	@Test
+	public static void searchAndBookHotel() throws Throwable {
 
 		WebElement location = driver.findElement(By.xpath("//select[@id='location']"));
 		Select s = new Select(location);
@@ -96,18 +94,19 @@ public class Adactin {
 		driver.findElement(By.xpath("//input[@id='logout']")).click();
 	}
 
-	@Test
-	public void browserClose() {
+//	@AfterTest
+	public static void browserClose() {
 		driver.navigate().back();
 		driver.quit();
 	}
 
-//	public static void main(String[] args) throws Throwable {
-//		
-//		browserLaunch();
-//		getURL();
-//		login();
-//		searchAndBookHotel();
-//		browserClose();
-//		
+	public static void main(String[] args) throws Throwable {
+		
+		browserLaunch();
+		getURL();
+		login();
+		searchAndBookHotel();
+		browserClose();
+		
+}
 }
