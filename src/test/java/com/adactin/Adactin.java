@@ -5,35 +5,42 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Adactin {
 
 	static WebDriver driver;
 
-//	@Test
-	public static void browserLaunch() {
-
+	@BeforeTest
+	public  void browserLaunch() {
+		
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
 	}
 
-//	@Test
-	public static void getURL() {
+	@BeforeClass
+	public  void getURL() {
+
 		driver.get("https://adactinhotelapp.com/");
 	}
 
-//	@BeforeTest
-	public static void login() {
+	@BeforeMethod
+	public  void login() {
 		driver.findElement(By.xpath("//input[@id='username']")).sendKeys("Jivita04");
 		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("123456");
 		driver.findElement(By.xpath("//input[@id='login']")).click();
 	}
 
-//	@Test
-	public static void searchAndBookHotel() throws Throwable {
+	@Test
+	public  void searchAndBookHotel() throws Throwable {
 
 		WebElement location = driver.findElement(By.xpath("//select[@id='location']"));
 		Select s = new Select(location);
@@ -89,24 +96,24 @@ public class Adactin {
 		driver.findElement(By.xpath("//input[@id='book_now']")).click();
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//input[@id='my_itinerary']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 
 		driver.findElement(By.xpath("//input[@id='logout']")).click();
 	}
 
-//	@AfterTest
-	public static void browserClose() {
+	@AfterMethod
+	public   void browserClose() {
 		driver.navigate().back();
 		driver.quit();
 	}
 
-	public static void main(String[] args) throws Throwable {
-		
-		browserLaunch();
-		getURL();
-		login();
-		searchAndBookHotel();
-		browserClose();
-		
-}
+//	public static void main(String[] args) throws Throwable {
+//		
+//		browserLaunch();
+//		getURL();
+//		login();
+//		searchAndBookHotel();
+//		browserClose();
+//		
+//}
 }
